@@ -35,6 +35,7 @@ pub mod prelude;
 pub mod serial;
 // pub mod spi;
 pub mod sysctl;
+pub mod timer;
 
 use embedded_hal as hal;
 pub use tm4c129x;
