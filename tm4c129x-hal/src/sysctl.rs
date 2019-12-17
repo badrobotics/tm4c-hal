@@ -224,6 +224,10 @@ pub enum Domain {
     Watchdog1,
     /// Watchdog 0
     Watchdog0,
+    /// 32/16-bit Timer 7
+    Timer7,
+    /// 32/16-bit Timer 6
+    Timer6,
     /// 32/16-bit Timer 5
     Timer5,
     /// 32/16-bit Timer 4
@@ -336,6 +340,14 @@ pub fn reset(_lock: &PowerControl, pd: Domain) {
         Domain::Watchdog0 => unsafe {
             bb::toggle_bit(&p.srwd, 0);
             bb::spin_bit(&p.prwd, 0);
+        },
+        Domain::Timer7 => unsafe {
+            bb::toggle_bit(&p.srtimer, 7);
+            bb::spin_bit(&p.prtimer, 7);
+        },
+        Domain::Timer6 => unsafe {
+            bb::toggle_bit(&p.srtimer, 6);
+            bb::spin_bit(&p.prtimer, 6);
         },
         Domain::Timer5 => unsafe {
             bb::toggle_bit(&p.srtimer, 5);
@@ -566,6 +578,8 @@ fn control_run_power(pd: Domain, on: bool) {
     match pd {
         Domain::Watchdog1 => unsafe { bb::change_bit(&p.rcgcwd, 1, on) },
         Domain::Watchdog0 => unsafe { bb::change_bit(&p.rcgcwd, 0, on) },
+        Domain::Timer7 => unsafe { bb::change_bit(&p.rcgctimer, 7, on) },
+        Domain::Timer6 => unsafe { bb::change_bit(&p.rcgctimer, 6, on) },
         Domain::Timer5 => unsafe { bb::change_bit(&p.rcgctimer, 5, on) },
         Domain::Timer4 => unsafe { bb::change_bit(&p.rcgctimer, 4, on) },
         Domain::Timer3 => unsafe { bb::change_bit(&p.rcgctimer, 3, on) },
@@ -624,6 +638,8 @@ fn control_sleep_power(pd: Domain, on: bool) {
     match pd {
         Domain::Watchdog1 => unsafe { bb::change_bit(&p.scgcwd, 1, on) },
         Domain::Watchdog0 => unsafe { bb::change_bit(&p.scgcwd, 0, on) },
+        Domain::Timer7 => unsafe { bb::change_bit(&p.scgctimer, 7, on) },
+        Domain::Timer6 => unsafe { bb::change_bit(&p.scgctimer, 6, on) },
         Domain::Timer5 => unsafe { bb::change_bit(&p.scgctimer, 5, on) },
         Domain::Timer4 => unsafe { bb::change_bit(&p.scgctimer, 4, on) },
         Domain::Timer3 => unsafe { bb::change_bit(&p.scgctimer, 3, on) },
@@ -682,6 +698,8 @@ fn control_deep_sleep_power(pd: Domain, on: bool) {
     match pd {
         Domain::Watchdog1 => unsafe { bb::change_bit(&p.dcgcwd, 1, on) },
         Domain::Watchdog0 => unsafe { bb::change_bit(&p.dcgcwd, 0, on) },
+        Domain::Timer7 => unsafe { bb::change_bit(&p.dcgctimer, 7, on) },
+        Domain::Timer6 => unsafe { bb::change_bit(&p.dcgctimer, 6, on) },
         Domain::Timer5 => unsafe { bb::change_bit(&p.dcgctimer, 5, on) },
         Domain::Timer4 => unsafe { bb::change_bit(&p.dcgctimer, 4, on) },
         Domain::Timer3 => unsafe { bb::change_bit(&p.dcgctimer, 3, on) },
