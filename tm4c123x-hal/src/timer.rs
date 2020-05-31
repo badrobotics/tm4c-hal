@@ -1,7 +1,7 @@
 //! Timers
 
-use tm4c123x::{TIMER0, TIMER1, TIMER2, TIMER3, TIMER4, TIMER5};
-use tm4c123x::{WTIMER0, WTIMER1, WTIMER2, WTIMER3, WTIMER4, WTIMER5};
+pub use tm4c123x::{TIMER0, TIMER1, TIMER2, TIMER3, TIMER4, TIMER5};
+pub use tm4c123x::{WTIMER0, WTIMER1, WTIMER2, WTIMER3, WTIMER4, WTIMER5};
 
 pub use tm4c_hal::timer_hal_macro;
 
@@ -10,8 +10,8 @@ extern crate embedded_hal as hal;
 use hal::timer::CountDown;
 use hal::timer::Periodic;
 
+use crate::time::Hertz;
 use crate::sysctl::Clocks;
-use crate::sysctl::Hertz;
 use crate::sysctl;
 
 use void::Void;
