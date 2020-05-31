@@ -1,9 +1,4 @@
 //! Timers
-//!
-//! ADW here. Rambling because I'm too tired right now to write any actual code. I'm planning on
-//! moving the macro here to tm4c-hal/src/lib.rs. This should also let me delete the macro instance
-//! in tm4c123x-hal/src/timer.rs as well. The two peripherals have nearly identical register sets,
-//! with none of the differences used here.
 
 pub use tm4c129x::{TIMER0, TIMER1, TIMER2, TIMER3, TIMER4, TIMER5, TIMER6, TIMER7};
 
